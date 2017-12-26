@@ -1,18 +1,17 @@
 import scrapy
 
-from tutorial.items import DmozItem
+from tutorial.items import SegmentFault
 
-class DmozSpider(scrapy.Spider):
-    name = "dmoz"
-    allowed_domains = ["dmoz.org"]
+class SfSpider(scrapy.Spider):
+    name = "sf"
+    allowed_domains = ["segmentfault.com"]
     start_urls = [
-        "http://www.dmoz.org/Computers/Programming/Languages/Python/Books/",
-        "http://www.dmoz.org/Computers/Programming/Languages/Python/Resources/"
+        "https://segmentfault.com/questions"
     ]
 
     def parse(self, response):
         for sel in response.xpath('//ul/li'):
-            item = DmozItem()
+            item = SegmentFault()
             item['title'] = sel.xpath('a/text()').extract()
             item['link'] = sel.xpath('a/@href').extract()
             item['desc'] = sel.xpath('text()').extract()

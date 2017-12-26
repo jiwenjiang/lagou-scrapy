@@ -14,7 +14,7 @@ import scrapy
 #     pass
 
 
-class DmozItem(scrapy.Item):
+class SegmentFault(scrapy.Item):
     title = scrapy.Field()
     link = scrapy.Field()
     desc = scrapy.Field()
