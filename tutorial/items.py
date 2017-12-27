@@ -16,5 +16,4 @@ import scrapy
 
 class SegmentFault(scrapy.Item):
     title = scrapy.Field()
-    link = scrapy.Field()
-    desc = scrapy.Field()
+    auth = scrapy.Field()

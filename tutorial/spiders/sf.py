@@ -10,9 +10,8 @@ class SfSpider(scrapy.Spider):
     ]
 
     def parse(self, response):
-        for sel in response.xpath('//ul/li'):
+        for sel in response.xpath('//section'):
             item = SegmentFault()
-            item['title'] = sel.xpath('a/text()').extract()
-            item['link'] = sel.xpath('a/@href').extract()
-            item['desc'] = sel.xpath('text()').extract()
+            item['title'] = sel.xpath('div[2]/h2[1]/a[1]/text()').extract()
+            item['auth'] = sel.xpath('div[2]/ul[1]/li[1]/a[1]/text()').extract()
             yield item
