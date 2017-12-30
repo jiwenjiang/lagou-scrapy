@@ -4,9 +4,9 @@ from tutorial.items import SegmentFault
 
 class SfSpider(scrapy.Spider):
     name = "sf"
-    allowed_domains = ["segmentfault.com"]
+    allowed_domains = ["soso.gamersky.com"]
     start_urls = [
-        "https://segmentfault.com/questions"
+        "http://soso.gamersky.com/cse/search?q=lol&click=1&s=3068275339727451251&nsid=1"
     ]
 
     def parse(self, response):
