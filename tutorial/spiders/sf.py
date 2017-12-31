@@ -16,7 +16,6 @@ class SfSpider(scrapy.Spider):
             print(i)
             yield scrapy.FormRequest(str(url), callback=self.parseJson, formdata=formdata)
 
-
     def parse(self, response):
         self.logger.info('A response from %s just arrived!', response.url)
 
