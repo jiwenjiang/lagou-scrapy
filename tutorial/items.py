@@ -14,6 +14,6 @@ import scrapy
 #     pass
 
 
-class SegmentFault(scrapy.Item):
+class LaGou(scrapy.Item):
     salary = scrapy.Field()
     company = scrapy.Field()

@@ -41,7 +41,7 @@ cookies = {
 data = {
     'first': False,
     'pn':1,
-    'kd': 'java',
+    'kd': 'javascript',
 }
 
 def get_job(data):
@@ -107,3 +107,9 @@ def url(data):
 if __name__ == '__main__':
     url(data)
 
+ jsonresponse = json.loads(response.body_as_unicode())
+        for sel in jsonresponse['content']['positionResult']['result']:
+            item = Lagou()
+            item['salary'] = sel['salary']
+            item['company'] = sel['companyFullName']
+            yield item
