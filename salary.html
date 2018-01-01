@@ -19,10 +19,17 @@
         nV in pV ? pV[nV]++ : (pV[nV] = 1);
         return pV;
     }, {})
-    var xData=[...Object.keys(arr)]
-    var yData=[...Object.values(arr)]
-    console.log(xData)
-    console.log(yData)
+    var xData = [...Object.keys(arr).sort(function (a, b) {
+        return a - b
+    })
+    ]
+    var yData = xData.map(function (v) {
+        return arr[v]
+    })
+    // var yData=[...Object.values(arr)]
+
+    // console.log(xData)
+    // console.log(yData)
     console.log(arr)
     // 基于准备好的dom，初始化echarts实例
     var myChart = echarts.init(document.getElementById('main'));
@@ -30,7 +37,7 @@
     // 指定图表的配置项和数据
     var option = {
         title: {
-            text: '拉勾网前端薪资统计(共计统计195家招聘0-5年前端开发信息)'
+            text: '拉勾网前端薪资统计(共计统计成都195家招聘0-5年前端开发信息)'
         },
         color: ['#3398DB'],
         tooltip: {
@@ -53,16 +60,16 @@
                     alignWithLabel: true
                 },
                 axisLabel: {
-                formatter: '{value} k'
-            }
+                    formatter: '{value} k'
+                }
             }
         ],
         yAxis: [
             {
                 type: 'value',
                 axisLabel: {
-                formatter: '{value} 家'
-            }
+                    formatter: '{value} 家'
+                }
             }
         ],
         series: [
