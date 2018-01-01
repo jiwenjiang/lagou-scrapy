@@ -17,3 +17,5 @@ import scrapy
 class LaGou(scrapy.Item):
     salary = scrapy.Field()
     company = scrapy.Field()
+    financeStage = scrapy.Field()
+    workYear = scrapy.Field()
