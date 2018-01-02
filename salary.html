@@ -9,14 +9,14 @@
 <body>
 <!-- 筛选条件 -->
 <div>
-    工作经验：<select name="" id="workYear">
+    工作经验：<select name="" id="workYear" onchange="workChange(this)">
     <option value="">不限</option>
     <option value="应届毕业生">应届毕业生</option>
     <option value="1-3年">1-3年</option>
     <option value="3-5年">3-5年</option>
     <option value="5-10年">5-10年</option>
 </select>
-    公司规模：<select name="" id="financeStage">
+    公司规模：<select name="" id="financeStage" onchange="stageChange(this)">
     <option value="">不限</option>
     <option value="未融资">未融资</option>
     <option value="不需要融资">不需要融资</option>
@@ -37,18 +37,20 @@
     var arr = [];
     var temData = data.concat();
     var average = 0;
+    var work = '', stage = '';
     initData();
     renderChart();
 
     // 指定图表的配置项和数据
     function initData() {
+        average = 0;
         arr = temData.map(function (value) {
             return value.salary && value.salary.replace(/[k|K\u4e00-\u9fa5]/g, "").split('-').reduce(function (pV, nV, i, array) {
                 if (array.length > 1) {
-                    average += pV + nV / 2
+                    average = Number(average) + pV + nV / 2
                     return pV + nV / 2
                 } else {
-                    average += Number(nV)
+                    average = +average + Number(nV)
                     return nV
                 }
                 // return array.length > 1 ? pV + nV / 2 : nV
@@ -58,7 +60,6 @@
             return pV;
         }, {})
         average = (average / temData.length).toFixed(2)
-        console.log(average)
     }
 
     function renderChart() {
@@ -122,6 +123,30 @@
 
         // 使用刚指定的配置项和数据显示图表。
         myChart.setOption(option);
+    }
+
+    function filter() {
+        temData = data.filter(function (value) {
+            return work
+                ? stage
+                    ? value.workYear == work && value.financeStage == stage
+                    : value.workYear == work
+                : stage
+                    ? value.financeStage == stage
+                    : data
+        })
+        initData();
+        renderChart();
+    }
+
+    function workChange(e) {
+        work = e.value;
+        filter();
+    }
+
+    function stageChange(e) {
+        stage = e.value;
+        filter();
     }
 
 
