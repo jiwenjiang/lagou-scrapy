@@ -9,18 +9,34 @@
 <body>
 <!-- 筛选条件 -->
 <div>
-    工作经验：<select name="" id="">
-    <option value="不限">不限</option>
+    工作经验：<select name="" id="workYear">
+    <option value="">不限</option>
     <option value="应届毕业生">应届毕业生</option>
     <option value="1-3年">1-3年</option>
     <option value="3-5年">3-5年</option>
+    <option value="5-10年">5-10年</option>
 </select>
+    公司规模：<select name="" id="financeStage">
+    <option value="">不限</option>
+    <option value="未融资">未融资</option>
+    <option value="不需要融资">不需要融资</option>
+    <option value="天使轮">天使轮</option>
+    <option value="A轮">A轮</option>
+    <option value="B轮">B轮</option>
+    <option value="C轮">C轮</option>
+    <option value="D轮及以上">D轮及以上</option>
+    <option value="上市公司">上市公司</option>
+</select>
+</div>
+<div>
+    <!--公司领域：<input type="checkbox">-->
 </div>
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 <div id="main" style="width: 1000px;height:580px;"></div>
 <script type="text/javascript">
     var arr = [];
     var temData = data.concat();
+    var average = 0;
     initData();
     renderChart();
 
@@ -28,12 +44,21 @@
     function initData() {
         arr = temData.map(function (value) {
             return value.salary && value.salary.replace(/[k|K\u4e00-\u9fa5]/g, "").split('-').reduce(function (pV, nV, i, array) {
-                return array.length > 1 ? pV + nV / 2 : nV
+                if (array.length > 1) {
+                    average += pV + nV / 2
+                    return pV + nV / 2
+                } else {
+                    average += Number(nV)
+                    return nV
+                }
+                // return array.length > 1 ? pV + nV / 2 : nV
             }, 0)
         }).reduce(function (pV, nV) {
             nV in pV ? pV[nV]++ : (pV[nV] = 1);
             return pV;
         }, {})
+        average = (average / temData.length).toFixed(2)
+        console.log(average)
     }
 
     function renderChart() {
@@ -47,7 +72,7 @@
         })
         var option = {
             title: {
-                text: `拉勾网前端薪资统计(共计统计成都${temData.length}家前端开发招聘信息)`
+                text: `拉勾网前端薪资统计(共计统计成都${temData.length}家前端开发招聘信息，平均工资${average} k)`
             },
             color: ['#3398DB'],
             tooltip: {
