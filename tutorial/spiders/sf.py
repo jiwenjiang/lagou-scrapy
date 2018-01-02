@@ -10,9 +10,10 @@ class SfSpider(scrapy.Spider):
     # allowed_domains = ["lagou.com"]
 
     def start_requests(self):
-        url = "https://www.lagou.com/jobs/positionAjax.json?gj=3%E5%B9%B4%E5%8F%8A%E4%BB%A5%E4%B8%8B%2C3-5%E5%B9%B4&xl=%E6%9C%AC%E7%A7%91&px=default&city=%E6%88%90%E9%83%BD&needAddtionalResult=false&isSchoolJob=0"
-        for i in range(1, 14):
-            formdata = {'first': 'true', 'pn': str(i), 'kd': 'web前端'}
+        url = "https://www.lagou.com/jobs/positionAjax.json?city=%E6%88%90%E9%83%BD&needAddtionalResult=false&isSchoolJob=0"
+        for i in range(1, 31):
+            istrue = 'true' if i == 1 else 'false'
+            formdata = {'first': istrue, 'pn': str(i), 'kd': 'web前端'}
             print(i)
             yield scrapy.FormRequest(str(url), callback=self.parseJson, formdata=formdata)
 
@@ -25,4 +26,7 @@ class SfSpider(scrapy.Spider):
             item = LaGou()
             item['salary'] = sel['salary']
             item['company'] = sel['companyFullName']
+            item['financeStage'] = sel['financeStage']
+            item['workYear'] = sel['workYear']
+            item['industryField'] = sel['industryField'].split(",")
             yield item
