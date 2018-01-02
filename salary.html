@@ -7,82 +7,102 @@
     <script src="./json.js"></script>
 </head>
 <body>
+<!-- 筛选条件 -->
+<div>
+    工作经验：<select name="" id="">
+    <option value="不限">不限</option>
+    <option value="应届毕业生">应届毕业生</option>
+    <option value="1-3年">1-3年</option>
+    <option value="3-5年">3-5年</option>
+</select>
+</div>
 <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
 <div id="main" style="width: 1000px;height:580px;"></div>
 <script type="text/javascript">
-    // JSON数据处理
-    var arr = data.map(function (value) {
-        return value.salary && value.salary.replace(/k|K/g, "").split('-').reduce(function (pV, nV) {
-            return pV + nV / 2
-        }, 0)
-    }).reduce(function (pV, nV) {
-        nV in pV ? pV[nV]++ : (pV[nV] = 1);
-        return pV;
-    }, {})
-    var xData = [...Object.keys(arr).sort(function (a, b) {
-        return a - b
-    })
-    ]
-    var yData = xData.map(function (v) {
-        return arr[v]
-    })
-    // var yData=[...Object.values(arr)]
-
-    // console.log(xData)
-    // console.log(yData)
-    console.log(arr)
-    // 基于准备好的dom，初始化echarts实例
-    var myChart = echarts.init(document.getElementById('main'));
+    var arr = [];
+    var temData = data.concat();
+    initData();
+    renderChart();
 
     // 指定图表的配置项和数据
-    var option = {
-        title: {
-            text: '拉勾网前端薪资统计(共计统计成都195家招聘0-5年前端开发信息)'
-        },
-        color: ['#3398DB'],
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {            // 坐标轴指示器，坐标轴触发有效
-                type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-            }
-        },
-        grid: {
-            left: '3%',
-            right: '4%',
-            bottom: '3%',
-            containLabel: true
-        },
-        xAxis: [
-            {
-                type: 'category',
-                data: xData,
-                axisTick: {
-                    alignWithLabel: true
-                },
-                axisLabel: {
-                    formatter: '{value} k'
+    function initData() {
+        arr = temData.map(function (value) {
+            return value.salary && value.salary.replace(/[k|K\u4e00-\u9fa5]/g, "").split('-').reduce(function (pV, nV, i, array) {
+                return array.length > 1 ? pV + nV / 2 : nV
+            }, 0)
+        }).reduce(function (pV, nV) {
+            nV in pV ? pV[nV]++ : (pV[nV] = 1);
+            return pV;
+        }, {})
+    }
+
+    function renderChart() {
+        var xData = [...Object.keys(arr).sort(function (a, b) {
+            return a - b
+        })
+    ]
+
+        var yData = xData.map(function (v) {
+            return arr[v]
+        })
+        var option = {
+            title: {
+                text: `拉勾网前端薪资统计(共计统计成都${temData.length}家前端开发招聘信息)`
+            },
+            color: ['#3398DB'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                 }
-            }
-        ],
-        yAxis: [
-            {
-                type: 'value',
-                axisLabel: {
-                    formatter: '{value} 家'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    data: xData,
+                    axisTick: {
+                        alignWithLabel: true
+                    },
+                    axisLabel: {
+                        formatter: '{value} k'
+                    }
                 }
-            }
-        ],
-        series: [
-            {
-                name: '公司数目',
-                type: 'bar',
-                barWidth: '60%',
-                data: yData
-            }
-        ]
-    };
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        formatter: '{value} 家'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '公司数目',
+                    type: 'bar',
+                    barWidth: '60%',
+                    data: yData
+                }
+            ]
+        };
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    }
+
+
+    console.log(arr)
+    console.log(data)
+
 </script>
 </body>
 </html>

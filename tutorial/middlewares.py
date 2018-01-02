@@ -7,7 +7,7 @@
 
 from scrapy import signals
 import random
-import base64
+# import base64
 PROXIES = [
     {'ip_port': '106.39.179.244:80', 'user_pass': ''},
     {'ip_port': '65.52.223.99:80', 'user_pass': ''},
