@@ -7,14 +7,15 @@
 
 from scrapy import signals
 import random
+
 # import base64
 PROXIES = [
-    {'ip_port': '106.39.179.244:80', 'user_pass': ''},
-    {'ip_port': '65.52.223.99:80', 'user_pass': ''},
-    {'ip_port': '1.52.248.207:3128', 'user_pass': ''},
-    {'ip_port': '45.77.198.207:3128', 'user_pass': ''},
-    {'ip_port': '177.125.119.16:8080', 'user_pass': ''},
-    {'ip_port': '174.138.65.233:3128', 'user_pass': ''},
+    {'ip_port': '106.39.179.244:80'},
+    {'ip_port': '65.52.223.99:80'},
+    {'ip_port': '1.52.248.207:3128'},
+    {'ip_port': '45.77.198.207:3128'},
+    {'ip_port': '177.125.119.16:8080'},
+    {'ip_port': '174.138.65.233:3128'}
 ]
 
 
@@ -29,20 +30,15 @@ class RandomUserAgent(object):
         return cls(crawler.settings.getlist('USER_AGENTS'))
 
     def process_request(self, request, spider):
-        #print "**************************" + random.choice(self.agents)
+        # print "**************************" + random.choice(self.agents)
         request.headers.setdefault('User-Agent', random.choice(self.agents))
+
 
 class ProxyMiddleware(object):
     def process_request(self, request, spider):
         proxy = random.choice(PROXIES)
-        if proxy['user_pass'] is not None:
-            request.meta['proxy'] = "http://%s" % proxy['ip_port']
-            # encoded_user_pass = base64.encodestring(proxy['user_pass'])
-            # request.headers['Proxy-Authorization'] = 'Basic ' + encoded_user_pass
-            print("**************ProxyMiddleware have pass************" + proxy['ip_port'])
-        else:
-            print("**************ProxyMiddleware no pass************" + proxy['ip_port'])
-            request.meta['proxy'] = "http://%s" % proxy['ip_port']
+        print("**************ProxyMiddleware no pass************" + proxy['ip_port'])
+        request.meta['proxy'] = "http://%s" % proxy['ip_port']
 
 
 class TutorialSpiderMiddleware(object):
