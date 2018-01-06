@@ -59,7 +59,8 @@
             nV in pV ? pV[nV]++ : (pV[nV] = 1);
             return pV;
         }, {})
-        average = (average / temData.length).toFixed(2)
+
+        average = average ? (average / temData.length).toFixed(2) : 0;
     }
 
     function renderChart() {

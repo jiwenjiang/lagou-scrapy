@@ -117,11 +117,4 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20",
     "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
 ]
-PROXIES = [
-    {'ip_port': '123.125.159.122:80', 'user_pass': ''},
-    {'ip_port': '112.216.16.250:3128', 'user_pass': ''},
-    {'ip_port': '116.199.2.210:80', 'user_pass': ''},
-    {'ip_port': '211.159.247.184:80', 'user_pass': ''},
-    {'ip_port': '202.85.213.220:3128', 'user_pass': ''},
-    {'ip_port': '61.4.184.180:3128', 'user_pass': ''},
-]
+
