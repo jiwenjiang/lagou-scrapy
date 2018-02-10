@@ -39,13 +39,12 @@ COOKIES_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-    'User-Agent': 'User-Agent:Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
-                  'AppleWebKit/537.36 (KHTML, like Gecko) '
-                  'Chrome/60.0.3112.90 Safari/537.36',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36',
     'Accept': 'application/json, text/javascript, */*; q=0.01',
     'Host': 'www.lagou.com',
     'Cache-Control': 'no-cache',
     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+    'Cookie': 'JSESSIONID=ABAAABAAAGGABCB9DB06594E35E7110DEE2C284A2B7F0AA; user_trace_token=20180210191157-9d456791-e83b-4c95-ad98-c12b15308bd2; LGUID=20180210191158-36324b21-0e53-11e8-afce-5254005c3644; _gid=GA1.2.2011062565.1518261119; Hm_lvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1518261119; Hm_lpvt_4233e74dff0ae5bd0a3d81c6ccf756e6=1518265140; _ga=GA1.2.2020632721.1518261118; LGSID=20180210201900-937b7428-0e5c-11e8-826b-525400f775ce; PRE_UTM=; PRE_HOST=; PRE_SITE=https%3A%2F%2Fwww.lagou.com%2Fjobs%2Flist_web%25E5%2589%258D%25E7%25AB%25AF; PRE_LAND=https%3A%2F%2Fwww.lagou.com%2Fjobs%2Flist_web%25E5%2589%258D%25E7%25AB%25AF%3Fpx%3Ddefault%26city%3D%25E6%2588%2590%25E9%2583%25BD; LGRID=20180210201900-937b75b9-0e5c-11e8-826b-525400f775ce; SEARCH_ID=e924f127ba3e432ab3a824507b1ba770',
     'Origin': 'https://www.lagou.com',
     'Referer': 'https://www.lagou.com/jobs/list_web%E5%89%8D%E7%AB%AF?px=default&gj=3%E5%B9%B4%E5%8F%8A%E4%BB%A5%E4%B8%8B,3-5%E5%B9%B4&xl=%E6%9C%AC%E7%A7%91&city=%E6%88%90%E9%83%BD'
 }
@@ -117,4 +116,3 @@ USER_AGENTS = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/535.20 (KHTML, like Gecko) Chrome/19.0.1036.7 Safari/535.20",
     "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; fr) Presto/2.9.168 Version/11.52",
 ]
-
