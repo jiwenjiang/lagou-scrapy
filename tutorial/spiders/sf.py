@@ -36,6 +36,8 @@ class SfSpider(scrapy.Spider):
         print('---------------------------------------parse---------------------------------------')
 
     def parseJson(self, response):
+        print('============res===========')
+        print(response)
         jsonresponse = json.loads(response.body_as_unicode())
         # print(jsonresponse)
         for sel in jsonresponse['content']['positionResult']['result']:
